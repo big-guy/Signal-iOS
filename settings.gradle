@@ -1,0 +1,17 @@
+pluginManagement {
+   repositories {
+      gradlePluginPortal()
+      maven { url = uri("https://repo.nokee.dev/release") }
+      maven { url = uri("https://repo.nokee.dev/snapshot") }
+   }
+}
+
+plugins {
+   id 'dev.nokee.xcode-build-adapter' version '0.4.3256-202304262003.e45ba07d'
+   id("com.gradle.enterprise").version("3.12.6") // Sync with `build-logic/build-platform/build.gradle.kts`
+   id("io.github.gradle.gradle-enterprise-conventions-plugin").version("0.7.6")
+}
+
+rootProject.name = 'Signal-iOS'
+
+
