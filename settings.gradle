@@ -25,7 +25,6 @@ gradle.rootProject {
 			buildSettings.from([
 				PODS_ROOT: "$rootDir/Pods",
 				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
-				//PODS_PODFILE_DIR_PATH: rootDir,
 				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
 			])
 			if (name.startsWith('SignalServiceKit') ||
@@ -76,12 +75,10 @@ gradle.rootProject {
 		tasks.withType(XcodeTargetExecTask).configureEach {
 			buildSettings.from([
 				SWIFT_MODULE_NAME: '$(PRODUCT_MODULE_NAME)',
-				//PRODUCT_MODULE_NAME: '$(TARGET_NAME)',
 			])
 			buildSettings.from([
 				PODS_ROOT: "$rootDir/Pods",
 				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
-				//PODS_PODFILE_DIR_PATH: rootDir,
 				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
 			])
 			if (name.startsWith('CocoaLumberjack') ||
@@ -116,14 +113,14 @@ gradle.rootProject {
 
 			if (name.startsWith('LibSignalClient')) {
 				buildSettings.from([
-					USER_LIBRARY_DIR: '/Users/daniel/Library',
+					USER_LIBRARY_DIR: "${System.getProperty('user.home')}/Library",
 					LIBSIGNAL_FFI_PREBUILD_ARCHIVE: 'libsignal-client-ios-build-v0.22.2.tar.gz',
 					PRODUCT_MODULE_NAME: 'LibSignalClient',
 					LIBSIGNAL_FFI_LIB_TO_LINK: '$(OBJROOT)/$(PROJECT_NAME).build/libsignal_ffi/target/$(CARGO_BUILD_TARGET)/release/libsignal_ffi.a'
 				])
 			} else if (name.startsWith('SignalRingRTC')) {
 				buildSettings.from([
-					RINGRTC_PREBUILD_DIR: '/Users/daniel/Library/Caches/org.signal.ringrtc/prebuild-2.25.1',
+					RINGRTC_PREBUILD_DIR: "${System.getProperty('user.home')}/Library/Caches/org.signal.ringrtc/prebuild-2.26.0",
 					PRODUCT_MODULE_NAME: 'SignalRingRTC',
 					DERIVED_FILE_DIR: '$(OBJROOT)/$(PROJECT_NAME).build/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME).build/DerivedSources',
 				])
