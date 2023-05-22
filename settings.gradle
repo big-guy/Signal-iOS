@@ -14,208 +14,208 @@ plugins {
 
 rootProject.name = 'Signal-iOS'
 
-//import dev.nokee.buildadapter.xcode.internal.plugins.XcodeTargetExecTask
-//gradle.rootProject {
-//	project(':Signal') {
-//		tasks.withType(XcodeTargetExecTask).configureEach {
-//			buildSettings.from([
-//				SWIFT_MODULE_NAME: '$(PRODUCT_MODULE_NAME)',
-//				PRODUCT_MODULE_NAME: '$(TARGET_NAME)',
-//			])
-//			buildSettings.from([
-//				PODS_ROOT: "$rootDir/Pods",
-//				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
-//				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
-//			])
-//			if (name.startsWith('SignalServiceKit') ||
-//				name.startsWith('SignalMessaging') ||
-//				name.startsWith('SignalNSE') ||
-//				name.startsWith('SignalUI') ||
-//				name.startsWith('SignalShareExtension') ||
-//				name.startsWith('Signal')
-//				) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: '$(TARGET_NAME).framework/Headers',
-//				])
-//			}
-//
-//			if (name.startsWith('Signal')) {
-//				buildSettings.from([
-//					DERIVED_FILE_DIR: '$(OBJROOT)/$(PROJECT_NAME).build/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME).build/DerivedSources',
-//					TARGET_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					FRAMEWORKS_FOLDER_PATH: '$(TARGET_NAME).app/Frameworks',
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//					PLUGINS_FOLDER_PATH: '$(TARGET_NAME).app/PlugIns',
-//				])
-//			} else if (name.startsWith('SignalShareExtension')) {
-//				buildSettings.from([
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//				])
-//			} else if (name.startsWith('SignalUI')) {
-//				buildSettings.from([
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//				])
-//			} else if (name.startsWith('SignalNSE')) {
-//				buildSettings.from([
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//				])
-//			} else if (name.startsWith('SignalMessaging')) {
-//				buildSettings.from([
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//				])
-//			} else if (name.startsWith('SignalServiceKit')) {
-//				buildSettings.from([
-//					PODS_PODFILE_DIR_PATH: "$rootDir/.",
-//				])
-//			}
-//		}
-//	}
-//
-//	project(':Pods:Pods') {
-//		tasks.withType(XcodeTargetExecTask).configureEach {
-//			buildSettings.from([
-//				SWIFT_MODULE_NAME: '$(PRODUCT_MODULE_NAME)',
-//			])
-//			buildSettings.from([
-//				PODS_ROOT: "$rootDir/Pods",
-//				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
-//				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
-//			])
-//			if (name.startsWith('CocoaLumberjack') ||
-//				name.startsWith('SignalCoreKit') ||
-//				name.startsWith('SQLCipher') ||
-//				name.startsWith('LibSignalClient') ||
-//				name.startsWith('libwebp') ||
-//				name.startsWith('blurhash') ||
-//				name.startsWith('Curve25519Kit') ||
-//				name.startsWith('libPhoneNumber-iOS') ||
-//				name.startsWith('Mantle') ||
-//				name.startsWith('Reachability') ||
-//				name.startsWith('SAMKeychain') ||
-//				name.startsWith('SignalArgon2') ||
-//				name.startsWith('SignalRingRTC') ||
-//				name.startsWith('SwiftProtobuf') ||
-//				name.startsWith('YYImage') ||
-//				name.startsWith('Logging') ||
-//				name.startsWith('MobileCoinMinimal') ||
-//				name.startsWith('LibMobileCoin') ||
-//				name.startsWith('BonMot') ||
-//				name.startsWith('MobileCoin') ||
-//				name.startsWith('PureLayout') ||
-//				name.startsWith('SSZipArchive') ||
-//				name.startsWith('Starscream')
-//				) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: '$(TARGET_NAME).framework/Headers',
-//				])
-//			}
-//
-//			if (name.startsWith('LibSignalClient')) {
-//				buildSettings.from([
-//					//USER_LIBRARY_DIR: "${System.getProperty('user.home')}/Library",
-//					LIBSIGNAL_FFI_PREBUILD_ARCHIVE: 'libsignal-client-ios-build-v0.22.2.tar.gz',
-//					PRODUCT_MODULE_NAME: 'LibSignalClient',
-//					LIBSIGNAL_FFI_LIB_TO_LINK: '$(OBJROOT)/$(PROJECT_NAME).build/libsignal_ffi/target/$(CARGO_BUILD_TARGET)/release/libsignal_ffi.a'
-//				])
-//			} else if (name.startsWith('SignalRingRTC')) {
-//				buildSettings.from([
-//					//RINGRTC_PREBUILD_DIR: "${System.getProperty('user.home')}/Library/Caches/org.signal.ringrtc/prebuild-2.26.0",
-//					PRODUCT_MODULE_NAME: 'SignalRingRTC',
-//					DERIVED_FILE_DIR: '$(OBJROOT)/$(PROJECT_NAME).build/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME).build/DerivedSources',
-//				])
-//			} else if (name.startsWith('libPhoneNumber-iOS')) {
-//				buildSettings.from([
-//					PUBLIC_HEADERS_FOLDER_PATH: 'libPhoneNumber_iOS.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-SignalServiceKit')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalServiceKit.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-SignalMessaging')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalMessaging.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-SignalNSE')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalNSE.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-SignalUI')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalUI.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-SignalShareExtension')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalShareExtension.framework/Headers',
-//				])
-//			} else if (name.startsWith('Pods-Signal')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_Signal.framework/Headers',
-//				])
-//			} else if (name.startsWith('lottie-ios')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'Lottie.framework/Headers',
-//					PRODUCT_MODULE_NAME: 'Lottie',
-//				])
-//			} else if (name.startsWith('GRDB.swift')) {
-//				buildSettings.from([
-//					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
-//					PUBLIC_HEADERS_FOLDER_PATH: 'GRDB.framework/Headers',
-//					PRODUCT_MODULE_NAME: 'GRDB',
-//				])
-//			} else if (name.startsWith('Starscream')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'Starscream',
-//				])
-//			} else if (name.startsWith('LibMobileCoin')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'LibMobileCoin',
-//				])
-//			} else if (name.startsWith('MobileCoinMinimal')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'MobileCoinMinimal',
-//				])
-//			} else if (name.startsWith('BonMot')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'BonMot',
-//				])
-//			} else if (name.startsWith('Logging')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'Logging',
-//				])
-//			} else if (name.startsWith('blurhash')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'blurhash',
-//				])
-//			} else if (name.startsWith('SwiftProtobuf')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'SwiftProtobuf',
-//				])
-//			} else if (name.startsWith('SignalCoreKit')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'SignalCoreKit',
-//				])
-//			} else if (name.startsWith('SignalArgon2')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'SignalArgon2',
-//				])
-//			} else if (name.startsWith('Curve25519Kit')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'Curve25519Kit',
-//				])
-//			} else if (name.startsWith('MobileCoin')) {
-//				buildSettings.from([
-//					PRODUCT_MODULE_NAME: 'MobileCoin',
-//				])
-//			}
-//		}
-//	}
-//}
+import dev.nokee.buildadapter.xcode.internal.plugins.XcodeTargetExecTask
+gradle.rootProject {
+	project(':Signal') {
+		tasks.withType(XcodeTargetExecTask).configureEach {
+			buildSettings.from([
+				SWIFT_MODULE_NAME: '$(PRODUCT_MODULE_NAME)',
+				PRODUCT_MODULE_NAME: '$(TARGET_NAME)',
+			])
+			buildSettings.from([
+				PODS_ROOT: "$rootDir/Pods",
+				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
+				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
+			])
+			if (name.startsWith('SignalServiceKit') ||
+				name.startsWith('SignalMessaging') ||
+				name.startsWith('SignalNSE') ||
+				name.startsWith('SignalUI') ||
+				name.startsWith('SignalShareExtension') ||
+				name.startsWith('Signal')
+				) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: '$(TARGET_NAME).framework/Headers',
+				])
+			}
+
+			if (name.startsWith('Signal')) {
+				buildSettings.from([
+					DERIVED_FILE_DIR: '$(OBJROOT)/$(PROJECT_NAME).build/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME).build/DerivedSources',
+					TARGET_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					FRAMEWORKS_FOLDER_PATH: '$(TARGET_NAME).app/Frameworks',
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+					PLUGINS_FOLDER_PATH: '$(TARGET_NAME).app/PlugIns',
+				])
+			} else if (name.startsWith('SignalShareExtension')) {
+				buildSettings.from([
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+				])
+			} else if (name.startsWith('SignalUI')) {
+				buildSettings.from([
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+				])
+			} else if (name.startsWith('SignalNSE')) {
+				buildSettings.from([
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+				])
+			} else if (name.startsWith('SignalMessaging')) {
+				buildSettings.from([
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+				])
+			} else if (name.startsWith('SignalServiceKit')) {
+				buildSettings.from([
+					PODS_PODFILE_DIR_PATH: "$rootDir/.",
+				])
+			}
+		}
+	}
+
+	project(':Pods:Pods') {
+		tasks.withType(XcodeTargetExecTask).configureEach {
+			buildSettings.from([
+				SWIFT_MODULE_NAME: '$(PRODUCT_MODULE_NAME)',
+			])
+			buildSettings.from([
+				PODS_ROOT: "$rootDir/Pods",
+				PODS_TARGET_SRCROOT: '$(PODS_ROOT)/$(TARGET_NAME)',
+				PODS_XCFRAMEWORKS_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/XCFrameworkIntermediates',
+			])
+			if (name.startsWith('CocoaLumberjack') ||
+				name.startsWith('SignalCoreKit') ||
+				name.startsWith('SQLCipher') ||
+				name.startsWith('LibSignalClient') ||
+				name.startsWith('libwebp') ||
+				name.startsWith('blurhash') ||
+				name.startsWith('Curve25519Kit') ||
+				name.startsWith('libPhoneNumber-iOS') ||
+				name.startsWith('Mantle') ||
+				name.startsWith('Reachability') ||
+				name.startsWith('SAMKeychain') ||
+				name.startsWith('SignalArgon2') ||
+				name.startsWith('SignalRingRTC') ||
+				name.startsWith('SwiftProtobuf') ||
+				name.startsWith('YYImage') ||
+				name.startsWith('Logging') ||
+				name.startsWith('MobileCoinMinimal') ||
+				name.startsWith('LibMobileCoin') ||
+				name.startsWith('BonMot') ||
+				name.startsWith('MobileCoin') ||
+				name.startsWith('PureLayout') ||
+				name.startsWith('SSZipArchive') ||
+				name.startsWith('Starscream')
+				) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: '$(TARGET_NAME).framework/Headers',
+				])
+			}
+
+			if (name.startsWith('LibSignalClient')) {
+				buildSettings.from([
+					//USER_LIBRARY_DIR: "${System.getProperty('user.home')}/Library",
+					LIBSIGNAL_FFI_PREBUILD_ARCHIVE: 'libsignal-client-ios-build-v0.22.2.tar.gz',
+					PRODUCT_MODULE_NAME: 'LibSignalClient',
+					LIBSIGNAL_FFI_LIB_TO_LINK: '$(OBJROOT)/$(PROJECT_NAME).build/libsignal_ffi/target/$(CARGO_BUILD_TARGET)/release/libsignal_ffi.a'
+				])
+			} else if (name.startsWith('SignalRingRTC')) {
+				buildSettings.from([
+					//RINGRTC_PREBUILD_DIR: "${System.getProperty('user.home')}/Library/Caches/org.signal.ringrtc/prebuild-2.26.0",
+					PRODUCT_MODULE_NAME: 'SignalRingRTC',
+					DERIVED_FILE_DIR: '$(OBJROOT)/$(PROJECT_NAME).build/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME).build/DerivedSources',
+				])
+			} else if (name.startsWith('libPhoneNumber-iOS')) {
+				buildSettings.from([
+					PUBLIC_HEADERS_FOLDER_PATH: 'libPhoneNumber_iOS.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-SignalServiceKit')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalServiceKit.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-SignalMessaging')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalMessaging.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-SignalNSE')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalNSE.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-SignalUI')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalUI.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-SignalShareExtension')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_SignalShareExtension.framework/Headers',
+				])
+			} else if (name.startsWith('Pods-Signal')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Pods_Signal.framework/Headers',
+				])
+			} else if (name.startsWith('lottie-ios')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'Lottie.framework/Headers',
+					PRODUCT_MODULE_NAME: 'Lottie',
+				])
+			} else if (name.startsWith('GRDB.swift')) {
+				buildSettings.from([
+					CONFIGURATION_BUILD_DIR: '$(SYMROOT)/$(CONFIGURATION)-$(PLATFORM_NAME)/$(TARGET_NAME)',
+					PUBLIC_HEADERS_FOLDER_PATH: 'GRDB.framework/Headers',
+					PRODUCT_MODULE_NAME: 'GRDB',
+				])
+			} else if (name.startsWith('Starscream')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'Starscream',
+				])
+			} else if (name.startsWith('LibMobileCoin')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'LibMobileCoin',
+				])
+			} else if (name.startsWith('MobileCoinMinimal')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'MobileCoinMinimal',
+				])
+			} else if (name.startsWith('BonMot')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'BonMot',
+				])
+			} else if (name.startsWith('Logging')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'Logging',
+				])
+			} else if (name.startsWith('blurhash')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'blurhash',
+				])
+			} else if (name.startsWith('SwiftProtobuf')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'SwiftProtobuf',
+				])
+			} else if (name.startsWith('SignalCoreKit')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'SignalCoreKit',
+				])
+			} else if (name.startsWith('SignalArgon2')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'SignalArgon2',
+				])
+			} else if (name.startsWith('Curve25519Kit')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'Curve25519Kit',
+				])
+			} else if (name.startsWith('MobileCoin')) {
+				buildSettings.from([
+					PRODUCT_MODULE_NAME: 'MobileCoin',
+				])
+			}
+		}
+	}
+}
