@@ -7,7 +7,7 @@ pluginManagement {
 }
 
 plugins {
-   id 'dev.nokee.xcode-build-adapter' version '0.4.3329-202305251053.b497b47c'
+   id 'dev.nokee.xcode-build-adapter' version '0.4.3329-202305251802.b497b47c'
    id("com.gradle.enterprise").version("3.12.6") // Sync with `build-logic/build-platform/build.gradle.kts`
    id("io.github.gradle.gradle-enterprise-conventions-plugin").version("0.7.6")
 }
