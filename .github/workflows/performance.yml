@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - nokee-dev
+
+# On PRs, "head_ref" is defined and is consistent across updates. On
+# pushes, it's not defined, so we use "run_id", which is unique across
+# every run; as a result, all actions on pushes will run to completion.
+#
+# Reference: https://docs.github.com/en/actions/using-jobs/using-concurrency
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  # Path format pulled from https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#xcode
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app
+
+jobs:
+  full_build:
+    name: Full Build
+    timeout-minutes: 40
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+        submodules: recursive
+      - name: Install dependencies
+        shell: bash
+        run: make dependencies && pod install --repo-update
+      - name: Prime Gradle
+        run: ./gradlew help -Dskip-cocoapods
+      - name: Build Xcode
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+      - name: Build Gradle
+        run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods
+
+  up_to_date_build:
+    name: Up-to-date Build
+    timeout-minutes: 40
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+        submodules: recursive
+      - name: Install dependencies
+        shell: bash
+        run: make dependencies && pod install --repo-update
+      - name: Prime Gradle
+        run: ./gradlew help -Dskip-cocoapods
+      - name: Build Xcode
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+      - name: Build Xcode Up-to-date
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build
+      - name: Build Gradle
+        run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods
+      - name: Build Gradle Up-to-date
+        run: ./gradlew Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods
+
+  up_to_date_with_build_cache_enabled_build:
+    name: Up-to-date with Build Cache Enabled Build
+    timeout-minutes: 40
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+        submodules: recursive
+      - name: Install dependencies
+        shell: bash
+        run: make dependencies && pod install --repo-update
+      - name: Prime Gradle
+        run: ./gradlew help -Dskip-cocoapods
+      - name: Build Xcode
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+      - name: Build Xcode Up-to-date
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build
+      - name: Build Gradle
+        run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
+      - name: Build Gradle Up-to-date
+        run: ./gradlew Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
+
+  build_cache_enabled_build:
+    name: Build Cache Enabled Build
+    timeout-minutes: 40
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+        submodules: recursive
+      - name: Install dependencies
+        shell: bash
+        run: make dependencies && pod install --repo-update
+      - name: Prime Gradle
+        run: ./gradlew help -Dskip-cocoapods
+      - name: Build Xcode
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+      - name: Build Xcode from Cache
+        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+      - name: Build Gradle
+        run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
+      - name: Build Gradle from Cache
+        run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
