@@ -32,7 +32,12 @@ jobs:
       - name: Prime Gradle
         run: ./gradlew help -Dskip-cocoapods
       - name: Build Xcode
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build &> full-build.log
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Logs
+          path: *.log
       - name: Build Gradle
         run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods
 
@@ -49,9 +54,14 @@ jobs:
       - name: Prime Gradle
         run: ./gradlew help -Dskip-cocoapods
       - name: Build Xcode
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build &> full-build.log
       - name: Build Xcode Up-to-date
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build &> up-to-date-build.log
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Logs
+          path: *.log
       - name: Build Gradle
         run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods
       - name: Build Gradle Up-to-date
@@ -70,9 +80,14 @@ jobs:
       - name: Prime Gradle
         run: ./gradlew help -Dskip-cocoapods
       - name: Build Xcode
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build &> full-build.log
       - name: Build Xcode Up-to-date
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO build &> up-to-date-build.log
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Logs
+          path: *.log
       - name: Build Gradle
         run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
       - name: Build Gradle Up-to-date
@@ -91,9 +106,14 @@ jobs:
       - name: Prime Gradle
         run: ./gradlew help -Dskip-cocoapods
       - name: Build Xcode
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build &> full-build.log
       - name: Build Xcode from Cache
-        run: xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build
+        run: time xcodebuild -derivedDataPath derived-data -workspace Signal.xcworkspace -scheme Signal -sdk iphonesimulator -configuration Debug CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO clean build &> cached-build.log
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Logs
+          path: *.log
       - name: Build Gradle
         run: ./gradlew clean Signal -Dsdk=iphonesimulator -Dconfiguration=Debug -Dskip-cocoapods --build-cache
       - name: Build Gradle from Cache
