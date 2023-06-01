@@ -21,7 +21,6 @@ env:
 jobs:
   full_build:
     name: Full Build
-    timeout-minutes: 40
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +38,6 @@ jobs:
 
   up_to_date_build:
     name: Up-to-date Build
-    timeout-minutes: 40
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -61,7 +59,6 @@ jobs:
 
   up_to_date_with_build_cache_enabled_build:
     name: Up-to-date with Build Cache Enabled Build
-    timeout-minutes: 40
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -83,7 +80,6 @@ jobs:
 
   build_cache_enabled_build:
     name: Build Cache Enabled Build
-    timeout-minutes: 40
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
